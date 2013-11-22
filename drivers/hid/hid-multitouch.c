@@ -287,10 +287,9 @@ static void mt_store_field(struct hid_usage *usage, struct mt_device *td,
 {
 	struct mt_fields *f = td->fields;
 
-	if (f->length >= HID_MAX_FIELDS)
-		return;
-
-	f->usages[f->length++] = usage->hid;
+	if ((BIT_WORD(usage->hid)) < (sizeof(hi->input->absbit) / sizeof(int)))
+		if (!test_bit(usage->hid, hi->input->absbit))
+			td->last_slot_field = usage->hid;
 }
 
 static int mt_input_mapping(struct hid_device *hdev, struct hid_input *hi,
