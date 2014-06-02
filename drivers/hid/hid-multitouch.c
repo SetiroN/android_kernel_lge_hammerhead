@@ -285,8 +285,6 @@ static void set_abs(struct input_dev *input, unsigned int code,
 static void mt_store_field(struct hid_usage *usage, struct mt_device *td,
 		struct hid_input *hi)
 {
-	struct mt_fields *f = td->fields;
-
 	if ((BIT_WORD(usage->hid)) < (sizeof(hi->input->absbit) / sizeof(int)))
 		if (!test_bit(usage->hid, hi->input->absbit))
 			td->last_slot_field = usage->hid;
